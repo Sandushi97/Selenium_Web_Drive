@@ -1,67 +1,83 @@
+package registration_practice_today;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
-public class Practical2 {
+public class Student_Registration {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-		WebDriver driver;
-		driver= new ChromeDriver();
-		
-		driver.navigate().to("file:///D:/3rd%20year/2nd%20Semester/practical%20SQA/index.html");
-		
+		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		String url="file:///D:/3rd%20year/2nd%20Semester/practical%20SQA/Practice_1/index.html";
+		driver.get(url);
 		driver.manage().window().maximize();
-		// To check using web element
-		WebElement element=driver.findElement(By.name("f_name"));
-		element.sendKeys("Joshep Vijay");
-		WebElement element1=driver.findElement(By.name("lname"));
-		element1.sendKeys("Chandrasekar");
-		WebElement element2=driver.findElement(By.name("dob"));
-		element2.sendKeys("06-22-1974");
-		WebElement element3=driver.findElement(By.id("email"));
-		element3.sendKeys("vijay@yahoo.com");
-		WebElement element4=driver.findElement(By.name("phnno"));
-		element4.sendKeys("+91677654321");
-		WebElement element5=driver.findElement(By.id("adrs"));
-		element5.sendKeys("64, Kaveri Street, Saligramam, Chennai 600093, Tamil \r\n"
-				+ "Nadu, India");
 		
-		//driver.findElement(By.id("male")).click();
-		//driver.findElement(By.name("hobby_1")).click();
-		//driver.findElement(By.name("hobby_2")).click();
+		WebElement fname=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[1]/td[2]/input"));
+		fname.sendKeys("Sandushi");
 		
-		WebElement radio=driver.findElement(By.id("male"));
-		radio.click();
+		WebElement lname=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[2]/td[2]/input"));
+		lname.sendKeys("Rathnayaka");
 		
-		WebElement checkbox1=driver.findElement(By.name("hobby_1"));
-		checkbox1.click();
+		WebElement dob=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[3]/td[2]/input"));
+		dob.sendKeys("7/27/1997");
+
 		
-		WebElement checkbox2=driver.findElement(By.name("hobby_2"));
-		checkbox2.click();
+		WebElement email=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[4]/td[2]/input"));
+		email.sendKeys("sandushirathnayaka@gmail.com");
 		
-		//driver.findElement(By.id("subject")).sendKeys("B.Tech");
-		WebElement select=driver.findElement(By.id("subject"));
-		select.sendKeys("B.Tech");
 		
-		String pswd="vijay@12345";
-		String rypw="vijay@12345";
-		driver.findElement(By.name("pswd")).sendKeys(pswd);
-		driver.findElement(By.id("rypw")).sendKeys(rypw);
-		if(pswd==rypw) {
-			System.out.println("Password are equal");
-			driver.findElement(By.name("result")).sendKeys("2A and B");
-			driver.findElement(By.name("z_score")).sendKeys("1.225");
-			driver.findElement(By.name("d_rank")).sendKeys("1");
+		
+		WebElement phone=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[5]/td[2]/input"));
+		phone.sendKeys("0774145512");
+		
+		WebElement address=driver.findElement(By.xpath("//*[@id=\"adrs\"]"));
+		address.sendKeys("Udawela Gedara,Divithotawela,Welimada");
+		
+		WebElement gender=driver.findElement(By.xpath("//*[@id=\"female\"]"));
+		gender.click();
+		
+		WebElement hobby1=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[8]/td[2]/input[1]"));
+		hobby1.click();
+		
+		WebElement hobby2=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[8]/td[2]/input[4]"));
+		hobby2.click();
+		
+		Select course=new Select(driver.findElement(By.xpath("/html/body/form/table/tbody/tr[9]/td[2]/select")));
+		course.selectByValue("MBA");
+		
+		//WebElement pwd=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[10]/td[2]/input"));
+		//pwd.sendKeys("Rathnayaka1@");
+		
+		//WebElement retypepwd=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[11]/td[2]/input"));
+		//retypepwd.sendKeys("Rathnayaka1@");
+		
+		String pwd="Rathnayaka1@";
+		String retypepwd="Rathnayaka1@";
+
+
+		//driver.findElement(By.xpath("/html/body/form/table/tbody/tr[10]/td[2]/input")).sendKeys(pwd);
+				
+		//driver.findElement(By.xpath("/html/body/form/table/tbody/tr[11]/td[2]/input")).sendKeys(retypepwd);
+		WebElement password=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[10]/td[2]/input"));
+		password.sendKeys(pwd);
+		
+		WebElement retypepwd1=driver.findElement(By.xpath("/html/body/form/table/tbody/tr[11]/td[2]/input"));
+		retypepwd1.sendKeys(retypepwd);
+		
+		//System.out.println(password.getAttribute("value"));
+		if(password.getAttribute("value").equals(retypepwd1.getAttribute("value"))) {
+			System.out.println("Passwords are equal");
+			driver.findElement(By.xpath("/html/body/form/table/tbody/tr[12]/td[2]/table/tbody/tr/td[2]/input")).sendKeys("2A and B");
+			driver.findElement(By.xpath("/html/body/form/table/tbody/tr[12]/td[2]/table/tbody/tr/td[3]/input")).sendKeys("1.2225");
+			driver.findElement(By.xpath("/html/body/form/table/tbody/tr[12]/td[2]/table/tbody/tr/td[4]/input")).sendKeys("1");
 		}
-			
-		
 		else {
-			System.out.println("Password are not equal");
+			System.out.println("Passwords are not equal");
 		}
-			
 		
 	}
 
